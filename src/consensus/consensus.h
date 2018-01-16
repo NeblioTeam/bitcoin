@@ -11,15 +11,15 @@ static const unsigned int MAX_BLOCK_SIZE = 1000000;
 /** The maximum allowed number of signature check operations in a block (network rule) */
 static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
-static const int COINBASE_MATURITY = 100;
+static const int COINBASE_MATURITY = 30;
+/** Kernel input must have this number of confirmations (network rule) */
+static const int STAKE_MIN_CONFIRMATIONS = 30;
 
 /** Flags for LockTime() */
 enum {
-    /* Use GetMedianTimePast() instead of nTime for end point timestamp. */
-    LOCKTIME_MEDIAN_TIME_PAST = (1 << 1),
 };
 
 /** Used as the flags parameter to CheckFinalTx() in non-consensus code */
-static const unsigned int STANDARD_LOCKTIME_VERIFY_FLAGS = LOCKTIME_MEDIAN_TIME_PAST;
+static const unsigned int STANDARD_LOCKTIME_VERIFY_FLAGS = 0;
 
 #endif // BITCOIN_CONSENSUS_CONSENSUS_H
