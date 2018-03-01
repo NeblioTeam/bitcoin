@@ -343,6 +343,8 @@ bool CBlockPolicyEstimator::isPriDataPoint(const CFeeRate &fee, double pri)
 
 void CBlockPolicyEstimator::processTransaction(const CTxMemPoolEntry& entry, bool fCurrentEstimate)
 {
+    // disable this
+    return;
     unsigned int txHeight = entry.GetHeight();
     uint256 hash = entry.GetTx().GetHash();
     if (mapMemPoolTxs[hash].stats != NULL) {
