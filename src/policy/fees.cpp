@@ -399,6 +399,8 @@ void CBlockPolicyEstimator::processTransaction(const CTxMemPoolEntry& entry, boo
 
 void CBlockPolicyEstimator::processBlockTx(unsigned int nBlockHeight, const CTxMemPoolEntry& entry)
 {
+    // we don't need this buggy fee estimator
+    return;
     if (!entry.WasClearAtEntry()) {
         // This transaction depended on other transactions in the mempool to
         // be included in a block before it was able to be included, so
