@@ -150,10 +150,10 @@ public:
         consensus.nProtocolV2Time = 0;
         consensus.nProtocolV3Time = 0;
         consensus.nLastPOWBlock = 500;
-        pchMessageStart[0] = 0x32;
-        pchMessageStart[1] = 0x5e;
-        pchMessageStart[2] = 0x6f;
-        pchMessageStart[3] = 0x86;
+        pchMessageStart[0] = 0x1b;
+        pchMessageStart[1] = 0xba;
+        pchMessageStart[2] = 0x63;
+        pchMessageStart[3] = 0xc5;
         vAlertPubKey = ParseHex("0471dc165db490094d35cde15b1f5d755fa6ad6f2b5ed0f340e3f17f57389c3c2af113a8cbcc885bde73305a553b5640c83021128008ddf882e856336269080496");
         nDefaultPort = 16325;
         nMinerThreads = 0;
@@ -171,8 +171,6 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
-
-        vSeeds.push_back(CDNSSeedData("nebliodseed1.nebl.io", "nebliodseed2.nebl.io"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,53);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,112);
