@@ -150,7 +150,7 @@ public:
         pchMessageStart[2] = 0x6f;
         pchMessageStart[3] = 0x86;
         vAlertPubKey = ParseHex("0471dc165db490094d35cde15b1f5d755fa6ad6f2b5ed0f340e3f17f57389c3c2af113a8cbcc885bde73305a553b5640c83021128008ddf882e856336269080496");
-        nDefaultPort = 6325;
+        nDefaultPort = 16325;
         nMinerThreads = 0;
         nMaxTipAge = 24 * 60 * 60;
         nPruneAfterHeight = 100000;
@@ -195,71 +195,71 @@ public:
 };
 static CTestNetParams testNetParams;
 
-/**
- * Regression test
- */
-class CRegTestParams : public CTestNetParams {
-public:
-    CRegTestParams() {
-        strNetworkID = "regtest";
-        consensus.nMajorityEnforceBlockUpgrade = 51;
-        consensus.nMajorityRejectBlockOutdated = 75;
-        consensus.nMajorityWindow = 100;
-        consensus.powLimit = uint256S("0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.fPowAllowMinDifficultyBlocks = true;
-        consensus.nProtocolV1RetargetingFixedTime = 0;
-        consensus.nProtocolV2Time = 0;
-        consensus.nProtocolV3Time = 0;
-        consensus.nLastPOWBlock = 500;
-        pchMessageStart[0] = 0x32;
-        pchMessageStart[1] = 0x5e;
-        pchMessageStart[2] = 0x6f;
-        pchMessageStart[3] = 0x86;
-        vAlertPubKey = ParseHex("0471dc165db490094d35cde15b1f5d755fa6ad6f2b5ed0f340e3f17f57389c3c2af113a8cbcc885bde73305a553b5640c83021128008ddf882e856336269080496");
-        nDefaultPort = 6325;
-        nMinerThreads = 0;
-        nMaxTipAge = 24 * 60 * 60;
-        nPruneAfterHeight = 100000;
+// /**
+//  * Regression test
+//  */
+// class CRegTestParams : public CTestNetParams {
+// public:
+//     CRegTestParams() {
+//         strNetworkID = "regtest";
+//         consensus.nMajorityEnforceBlockUpgrade = 51;
+//         consensus.nMajorityRejectBlockOutdated = 75;
+//         consensus.nMajorityWindow = 100;
+//         consensus.powLimit = uint256S("0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+//         consensus.fPowAllowMinDifficultyBlocks = true;
+//         consensus.nProtocolV1RetargetingFixedTime = 0;
+//         consensus.nProtocolV2Time = 0;
+//         consensus.nProtocolV3Time = 0;
+//         consensus.nLastPOWBlock = 500;
+//         pchMessageStart[0] = 0x32;
+//         pchMessageStart[1] = 0x5e;
+//         pchMessageStart[2] = 0x6f;
+//         pchMessageStart[3] = 0x86;
+//         vAlertPubKey = ParseHex("0471dc165db490094d35cde15b1f5d755fa6ad6f2b5ed0f340e3f17f57389c3c2af113a8cbcc885bde73305a553b5640c83021128008ddf882e856336269080496");
+//         nDefaultPort = 16325;
+//         nMinerThreads = 0;
+//         nMaxTipAge = 24 * 60 * 60;
+//         nPruneAfterHeight = 100000;
 
-        //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        genesis.hashMerkleRoot = genesis.BuildMerkleTree();
-        genesis.nVersion = 1;
-        genesis.nTime    = 1500674579;
-        genesis.nBits    = 0x207fffff;
-        genesis.nNonce   = 8485;
-        consensus.hashGenesisBlock = genesis.GetHash();
-        //assert(consensus.hashGenesisBlock == uint256S("0x7286972be4dbc1463d256049b7471c252e6557e222cab9be73181d359cd28bcc"));
+//         //! Modify the testnet genesis block so the timestamp is valid for a later start.
+//         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
+//         genesis.nVersion = 1;
+//         genesis.nTime    = 1500674579;
+//         genesis.nBits    = 0x207fffff;
+//         genesis.nNonce   = 8485;
+//         consensus.hashGenesisBlock = genesis.GetHash();
+//         //assert(consensus.hashGenesisBlock == uint256S("0x7286972be4dbc1463d256049b7471c252e6557e222cab9be73181d359cd28bcc"));
 
-        vFixedSeeds.clear();
-        vSeeds.clear();
+//         vFixedSeeds.clear();
+//         vSeeds.clear();
 
-        vSeeds.push_back(CDNSSeedData("nebliodseed1.nebl.io", "nebliodseed2.nebl.io"));
+//         vSeeds.push_back(CDNSSeedData("nebliodseed1.nebl.io", "nebliodseed2.nebl.io"));
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,53);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,112);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,181);
-        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
-        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
+//         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,53);
+//         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,112);
+//         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,181);
+//         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
+//         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
 
-        fRequireRPCPassword = true;
-        fMiningRequiresPeers = true;
-        fDefaultConsistencyChecks = false;
-        fRequireStandard = true;
-        fMineBlocksOnDemand = false;
-        fTestnetToBeDeprecatedFieldRPC = false;
+//         fRequireRPCPassword = true;
+//         fMiningRequiresPeers = true;
+//         fDefaultConsistencyChecks = false;
+//         fRequireStandard = true;
+//         fMineBlocksOnDemand = false;
+//         fTestnetToBeDeprecatedFieldRPC = false;
 
-        checkpointData = (Checkpoints::CCheckpointData) {
-            boost::assign::map_list_of
-            (     0, uint256S("0x7286972be4dbc1463d256049b7471c252e6557e222cab9be73181d359cd28bcc"))
-            (   100, uint256S("0x04a4cab534e60e5a1fc78770731090fdce91740c0bce4ed6a54d3ab7d7e9e50b"))
-            0,
-            0,
-            0
-        };
+//         checkpointData = (Checkpoints::CCheckpointData) {
+//             boost::assign::map_list_of
+//             (     0, uint256S("0x7286972be4dbc1463d256049b7471c252e6557e222cab9be73181d359cd28bcc"))
+//             (   100, uint256S("0x04a4cab534e60e5a1fc78770731090fdce91740c0bce4ed6a54d3ab7d7e9e50b"))
+//             0,
+//             0,
+//             0
+//         };
 
-    }
-};
-static CRegTestParams regTestParams;
+//     }
+// };
+// static CRegTestParams regTestParams;
 
 static CChainParams *pCurrentParams = 0;
 
@@ -274,8 +274,8 @@ CChainParams &Params(CBaseChainParams::Network network) {
             return mainParams;
         case CBaseChainParams::TESTNET:
             return testNetParams;
-        case CBaseChainParams::REGTEST:
-            return regTestParams;
+        // case CBaseChainParams::REGTEST:
+        //     return regTestParams;
         default:
             assert(false && "Unimplemented network");
             return mainParams;
