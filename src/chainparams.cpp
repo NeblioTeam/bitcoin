@@ -136,20 +136,22 @@ class CTestNetParams : public CMainParams {
 public:
     CTestNetParams() {
         strNetworkID = "test";
-        consensus.nMajorityEnforceBlockUpgrade = 51;
-        consensus.nMajorityRejectBlockOutdated = 75;
-        consensus.nMajorityWindow = 100;
+        consensus.nMaxReorganizationDepth = 500;
+        consensus.nMajorityEnforceBlockUpgrade = 750;
+        consensus.nMajorityRejectBlockOutdated = 950;
+        consensus.nMajorityWindow = 1000;
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.posLimitV2 = uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nTargetTimespan = 16 * 60; // 16 mins
         consensus.nTargetSpacingV1 = 2 * 60;
         consensus.nTargetSpacing = 2 * 60;
-        consensus.fPowAllowMinDifficultyBlocks = true;
-        consensus.nProtocolV1RetargetingFixedTime = 0;
-        consensus.nProtocolV2Time = 0;
-        consensus.nProtocolV3Time = 0;
-        consensus.nLastPOWBlock = 500;
+        consensus.fPowAllowMinDifficultyBlocks = false;
+        consensus.nProtocolV1RetargetingFixedTime = 1395631999;
+        consensus.nProtocolV2Time = 9999999999;
+        consensus.nProtocolV3Time = 9999999999;
+        consensus.nLastPOWBlock = 1000;
+        consensus.nStakeTimestampMask = 0xf;
         pchMessageStart[0] = 0x1b;
         pchMessageStart[1] = 0xba;
         pchMessageStart[2] = 0x63;
