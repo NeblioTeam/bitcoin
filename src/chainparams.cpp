@@ -145,7 +145,7 @@ public:
         consensus.posLimitV2 = uint256S("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nTargetTimespan = 16 * 60; // 16 mins
         consensus.nTargetSpacingV1 = 2 * 60;
-        consensus.nTargetSpacing = 2 * 60;
+        consensus.nTargetSpacing = 30;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.nProtocolV1RetargetingFixedTime = 1395631999;
         consensus.nProtocolV2Time = 9999999999;
