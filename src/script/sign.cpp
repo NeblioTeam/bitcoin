@@ -97,27 +97,27 @@ static bool SignStep(const BaseSignatureCreator& creator, const CScript& scriptP
         scriptSigRet << OP_0; // workaround CHECKMULTISIG bug
         return (SignN(vSolutions, creator, scriptPubKey, scriptSigRet));
 
-    case TX_COLDSTAKE:
-        if (fColdStake) {
-            // sign with the cold staker key
-            keyID = CKeyID(uint160(vSolutions[0]));
-        } else {
-            // sign with the owner key
-            keyID = CKeyID(uint160(vSolutions[1]));
-        }
-        if (!Sign1(keyID, creator, scriptPubKey, ret, sigversion))
-            return error("*** %s: failed to sign with the %s key.",
-                    __func__, fColdStake ? "cold staker" : "owner");
-        CPubKey vch;
-        if (!creator.KeyStore().GetPubKey(keyID, vch))
-            return error("%s : Unable to get public key from keyID", __func__);
+    // case TX_COLDSTAKE:
+    //     if (fColdStake) {
+    //         // sign with the cold staker key
+    //         keyID = CKeyID(uint160(vSolutions[0]));
+    //     } else {
+    //         // sign with the owner key
+    //         keyID = CKeyID(uint160(vSolutions[1]));
+    //     }
+    //     if (!Sign1(keyID, creator, scriptPubKey, ret, sigversion))
+    //         return error("*** %s: failed to sign with the %s key.",
+    //                 __func__, fColdStake ? "cold staker" : "owner");
+    //     CPubKey vch;
+    //     if (!creator.KeyStore().GetPubKey(keyID, vch))
+    //         return error("%s : Unable to get public key from keyID", __func__);
 
-        valtype oper;
-        oper.reserve(4);
-        oper.emplace_back((fColdStake ? (int) OP_TRUE : OP_FALSE));
-        ret.emplace_back(oper);
-        ret.emplace_back(ToByteVector(vch));
-        return true;
+    //     valtype oper;
+    //     oper.reserve(4);
+    //     oper.emplace_back((fColdStake ? (int) OP_TRUE : OP_FALSE));
+    //     ret.emplace_back(oper);
+    //     ret.emplace_back(ToByteVector(vch));
+    //     return true;
     }
     return false;
 }
