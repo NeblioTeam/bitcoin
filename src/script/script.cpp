@@ -151,6 +151,9 @@ const char* GetOpName(opcodetype opcode)
     case OP_NOP9                   : return "OP_NOP9";
     case OP_NOP10                  : return "OP_NOP10";
 
+    // cold staking
+    case OP_CHECKCOLDSTAKEVERIFY   : return "OP_CHECKCOLDSTAKEVERIFY";
+
     case OP_INVALIDOPCODE          : return "OP_INVALIDOPCODE";
 
     // Note:
@@ -218,6 +221,18 @@ bool CScript::IsPayToScriptHash() const
             this->at(0) == OP_HASH160 &&
             this->at(1) == 0x14 &&
             this->at(22) == OP_EQUAL);
+}
+
+bool CScript::IsPayToColdStaking() const
+{
+    // Extra-fast test for pay-to-cold-staking CScripts:
+    return (this->size() == 51 &&
+            (*this)[2] == OP_ROT &&
+            (*this)[4] == OP_CHECKCOLDSTAKEVERIFY &&
+            (*this)[5] == 0x14 &&
+            (*this)[27] == 0x14 &&
+            (*this)[49] == OP_EQUALVERIFY &&
+            (*this)[50] == OP_CHECKSIG);
 }
 
 bool CScript::IsPushOnly() const

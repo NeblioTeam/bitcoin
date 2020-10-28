@@ -173,6 +173,9 @@ enum opcodetype
     OP_PUBKEYHASH = 0xfd,
     OP_PUBKEY = 0xfe,
 
+    // cold staking
+    OP_CHECKCOLDSTAKEVERIFY = 0xd1,
+
     OP_INVALIDOPCODE = 0xff,
 };
 
@@ -587,6 +590,8 @@ public:
     unsigned int GetSigOpCount(const CScript& scriptSig) const;
 
     bool IsPayToScriptHash() const;
+
+    bool IsPayToColdStaking() const;
 
     /** Called by IsStandardTx and P2SH/BIP62 VerifyScript (which makes it consensus-critical). */
     bool IsPushOnly() const;
