@@ -249,11 +249,11 @@ static CScript CombineSignatures(const CScript& scriptPubKey, const BaseSignatur
         if (sigs1.empty() || sigs1[0].empty())
             return PushAll(sigs2);
         return PushAll(sigs1);
-    case TX_COLDSTAKE:
-        // Signatures are bigger than placeholders or empty scripts:
-        if (sigs1.script.empty() || sigs1.script[0].empty())
-            return sigs2;
-        return sigs1;
+    // case TX_COLDSTAKE:
+    //     // Signatures are bigger than placeholders or empty scripts:
+    //     if (sigs1.script.empty() || sigs1.script[0].empty())
+    //         return sigs2;
+    //     return sigs1;
     case TX_SCRIPTHASH:
         if (sigs1.empty() || sigs1.back().empty())
             return PushAll(sigs2);
