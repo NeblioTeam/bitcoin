@@ -96,7 +96,6 @@ static bool SignStep(const BaseSignatureCreator& creator, const CScript& scriptP
     case TX_MULTISIG:
         scriptSigRet << OP_0; // workaround CHECKMULTISIG bug
         return (SignN(vSolutions, creator, scriptPubKey, scriptSigRet));
-    }
 
     case TX_COLDSTAKE:
         if (fColdStake) {
