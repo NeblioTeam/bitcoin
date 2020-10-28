@@ -2793,6 +2793,14 @@ static bool CheckBlockSignature(const CBlock& block, const uint256& hash)
         vector<unsigned char>& vchPubKey = vSolutions[0];
         return CPubKey(vchPubKey).Verify(hash, block.vchBlockSig);
     }
+    else if (whichType == TX_COLDSTAKE) {
+        // pick the public key from the P2CS input
+        const CTxIn& txin = block.vtx[1]->vin[0];
+        int start = 1 + (int) *txin.scriptSig.begin(); // skip sig
+        start += 1 + (int) *(txin.scriptSig.begin()+start); // skip flag
+        pubkey = CPubKey(txin.scriptSig.begin()+start+1, txin.scriptSig.end());
+        return pubkey.Verify(hash, block.vchBlockSig);
+    }
     else
     {
         // Block signing key also can be encoded in the nonspendable output
