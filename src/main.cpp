@@ -2912,10 +2912,10 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const uint256& has
                                  REJECT_INVALID, "bad-cs-multiple");
     }
 
-    // Check proof-of-stake block signature
-    if (fCheckSig && !CheckBlockSignature(block, hash))
-        return state.DoS(100, error("CheckBlock(): bad proof-of-stake block signature"),
-                         REJECT_INVALID, "bad-block-signature");
+    // // Check proof-of-stake block signature
+    // if (fCheckSig && !CheckBlockSignature(block, hash))
+    //     return state.DoS(100, error("CheckBlock(): bad proof-of-stake block signature"),
+    //                      REJECT_INVALID, "bad-block-signature");
 
     // Check transactions
     BOOST_FOREACH(const CTransaction& tx, block.vtx) {
