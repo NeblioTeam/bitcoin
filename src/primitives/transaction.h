@@ -154,7 +154,7 @@ public:
         // to spend something, then we consider it dust.
         // A typical txout is 34 bytes big, and will
         // need a CTxIn of at least 148 bytes to spend:
-        // so dust is a txout less than 546 satoshis 
+        // so dust is a txout less than 546 satoshis
         // with default minRelayTxFee.
         size_t nSize = GetSerializeSize(SER_DISK,0)+148u;
         return 3*minRelayTxFee.GetFee(nSize);
@@ -262,6 +262,8 @@ public:
         // the coin stake transaction is marked with the first output empty
         return (vin.size() > 0 && (!vin[0].prevout.IsNull()) && vout.size() >= 2 && vout[0].IsEmpty());
     }
+    bool CheckColdStake(const CScript& script) const;
+    bool HasP2CSOutputs() const;
 
     friend bool operator==(const CTransaction& a, const CTransaction& b)
     {
