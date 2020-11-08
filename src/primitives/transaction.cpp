@@ -92,26 +92,32 @@ CTransaction& CTransaction::operator=(const CTransaction &tx) {
 bool CTransaction::CheckColdStake(const CScript& script) const
 {
 
-    // tx is a coinstake tx
+	// tx is a coinstake tx
     if (!IsCoinStake())
         return false;
 
-    // all inputs have the same scriptSig
-    CScript firstScript = vin[0].scriptSig;
-    if (vin.size() > 1) {
-        for (unsigned int i=1; i<vin.size(); i++)
-            if (vin[i].scriptSig != firstScript) return false;
-    }
+    if (vin.empty())
+        return false;
 
-    // all outputs except first (coinstake marker) and last (masternode payout)
-    // have the same pubKeyScript and it matches the script we are spending
-    if (vout[1].scriptPubKey != script) return false;
-    if (vin.size() > 3) {
-        for (unsigned int i=2; i<vout.size()-1; i++)
-            if (vout[i].scriptPubKey != script) return false;
-    }
+    // const boost::optional<std::vector<uint8_t>> firstPubKey =
+    //     vin[0].scriptSig.GetPubKeyOfP2CSScriptSig();
+    // if (!firstPubKey)
+    //     return false; // this is not P2CS
+
+    // // all inputs must be P2CS and must be paying to the same pubkey
+    // for (unsigned int i = 1; i < vin.size(); i++) {
+    //     if (vin[i].scriptSig.GetPubKeyOfP2CSScriptSig() != firstPubKey)
+    //         return false;
+    // }
+
+    // // all outputs except first (coinstake marker)
+    // // have the same pubKeyScript and it matches the script we are spending
+    // for (unsigned int i = 1; i < vout.size(); i++)
+    //     if (vout[i].scriptPubKey != script)
+    //         return false;
 
     return true;
+
 }
 
 bool CTransaction::HasP2CSOutputs() const
