@@ -443,7 +443,7 @@ Value decoderawtransaction(const Array& params, bool fHelp)
     CTransaction tx;
 
     if (!DecodeHexTx(tx, params[0].get_str()))
-        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed. Code 1");
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed");
 
     Object result;
     TxToJSON(tx, uint256(), result);
@@ -582,7 +582,7 @@ Value signrawtransaction(const Array& params, bool fHelp)
             txVariants.push_back(tx);
         }
         catch (const std::exception&) {
-            throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed. Code 2");
+            throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed");
         }
     }
 
@@ -774,7 +774,7 @@ Value sendrawtransaction(const Array& params, bool fHelp)
     // parse hex string from parameter
     CTransaction tx;
     if (!DecodeHexTx(tx, params[0].get_str()))
-        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed. Code 3");
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed");
     uint256 hashTx = tx.GetHash();
 
     bool fOverrideFees = false;
