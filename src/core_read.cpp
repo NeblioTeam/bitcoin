@@ -93,7 +93,7 @@ CScript ParseScript(std::string s)
 bool DecodeHexTx(CTransaction& tx, const std::string& strHexTx)
 {
     if (!IsHex(strHexTx)) {
-    	std::cout << "TX Not Hex";
+    	throw runtime_error("Must be hexadecimal string (not '"+strHexTx+"')");
         return false;
     }
 
