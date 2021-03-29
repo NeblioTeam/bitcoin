@@ -93,6 +93,7 @@ CScript ParseScript(std::string s)
 bool DecodeHexTx(CTransaction& tx, const std::string& strHexTx)
 {
     if (!IsHex(strHexTx))
+    	throw runtime_error("TX not hex");
         return false;
 
     vector<unsigned char> txData(ParseHex(strHexTx));
@@ -117,7 +118,8 @@ bool DecodeHexBlk(CBlock& block, const std::string& strHexBlk)
     try {
         ssBlock >> block;
     }
-    catch (const std::exception&) {
+    catch (const std::exception& e) {
+    	std::cout << e.what();
         return false;
     }
 
